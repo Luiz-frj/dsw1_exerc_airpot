@@ -8,26 +8,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
-<form action="AdmLogin.do" method="post">
-    <div class="row mb-3">
-        <label for="inputEmail">Email</label>
-        <input type="email" class="col-sm-2 col-form-label" id="inputEmail" required="required" name="email">
-    </div>
-    </div>
-    <div class="row mb-3">
-        <label for="inputPassword">Senha</label>
-        <input type="password" class="col-sm-2 col-form-label" id="inputPassword" required="required" name="password">
-    </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-</form>
+
+    <form action="adm.do" method="post">
+        <div class="row mb-3">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="col-sm-2 col-form-label" id="inputEmail" required="required" name="email">
+        </div>
+
+        <div class="row mb-3">
+            <label for="inputPassword">Senha</label>
+            <input type="password" class="col-sm-2 col-form-label" id="inputPassword" required="required" name="password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+
+    </form>
+
+    <p><a href="/includes/base.html">Retornar ao menu</a></p>
 
 </body>
 </html>
