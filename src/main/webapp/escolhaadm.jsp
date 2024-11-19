@@ -17,7 +17,7 @@
 <h2>Informe o que deseja fazer:</h2>
 <ul>
     <li><a href="cadastroVoos.jsp">Cadastrar Voo</a></li><br>
-    <li><a href="voostable.jsp">Tabela de voos</a></li><br>
+    <li><a href="voostable.jsp">Tabela de Voos</a></li><br>
     <li><a href="adm.do?action=logout">Voltar a pagina inicial</a></li><br>
 </ul>
 </body>

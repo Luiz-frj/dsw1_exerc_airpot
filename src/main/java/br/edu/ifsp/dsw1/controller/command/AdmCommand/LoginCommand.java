@@ -1,9 +1,6 @@
 package br.edu.ifsp.dsw1.controller.command.AdmCommand;
 
-import java.io.IOException;
-
 import br.edu.ifsp.dsw1.controller.command.Command;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -11,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 public class LoginCommand implements Command{
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 

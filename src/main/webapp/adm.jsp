@@ -18,22 +18,22 @@
 
 <body>
 
-    <form action="adm.do" method="post">
+    <form action="adm.do?action=login" method="post">
         <div class="row mb-3">
             <label for="inputEmail">Email</label>
-            <input type="email" class="col-sm-2 col-form-label" id="inputEmail" required="required" name="email">
+            <input type="email" class="col-sm-2 col-form-label" id="inputEmail" name="email">
         </div>
 
         <div class="row mb-3">
             <label for="inputPassword">Senha</label>
-            <input type="password" class="col-sm-2 col-form-label" id="inputPassword" required="required" name="password">
+            <input type="password" class="col-sm-2 col-form-label" id="inputPassword" name="password">
         </div>
 
         <button type="submit" class="btn btn-primary">Entrar</button>
 
     </form>
 
-    <p><a href="/includes/base.html">Retornar ao menu</a></p>
+    <p><a href="/index.jsp">Retornar ao menu</a></p>
 
 </body>
 </html>
