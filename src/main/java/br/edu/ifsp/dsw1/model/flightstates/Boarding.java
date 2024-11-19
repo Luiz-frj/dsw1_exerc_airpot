@@ -3,6 +3,7 @@ package br.edu.ifsp.dsw1.model.flightstates;
 import br.edu.ifsp.dsw1.model.entity.FlightData;
 
 public class Boarding implements State {
+
     private static Boarding instance = null;
 
     private Boarding() { }

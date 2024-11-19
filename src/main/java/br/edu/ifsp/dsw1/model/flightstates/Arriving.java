@@ -3,6 +3,7 @@ package br.edu.ifsp.dsw1.model.flightstates;
 import br.edu.ifsp.dsw1.model.entity.FlightData;
 
 public class Arriving implements State {
+
     private static Arriving instance = null;
 
     private Arriving() { }

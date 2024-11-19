@@ -33,7 +33,7 @@
 
     </form>
 
-    <p><a href="/index.jsp">Retornar ao menu</a></p>
+    <p><a href="index.jsp">Retornar ao menu</a></p>
 
 </body>
 </html>
