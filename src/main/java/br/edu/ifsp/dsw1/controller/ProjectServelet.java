@@ -50,7 +50,7 @@ public class ProjectServelet extends HttpServlet {
             }
         }
 
-        return view;
+        return resp.encodeRedirectURL(view);
     }
 
 }
