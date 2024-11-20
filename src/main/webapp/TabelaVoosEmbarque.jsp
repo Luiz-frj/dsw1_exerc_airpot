@@ -54,6 +54,6 @@
 
 </table>
 
-<a href="escolhaadm.jsp">Voltar para pagina anterior</a>
+<a href="index.jsp">Voltar para pagina anterior</a>
 </body>
 </html>
