@@ -1,5 +1,7 @@
 package br.edu.ifsp.dsw1.controller;
 
+import br.edu.ifsp.dsw1.model.entity.FlightData;
+import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +17,7 @@ public class ProjectServelet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final String email = "admin";
     private final String password = "admin";
+    private static final FlightDataCollection dataSource = new FlightDataCollection();
 
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,6 +59,12 @@ public class ProjectServelet extends HttpServlet {
                 break;
 
             case "cadastro":
+                Long number = Long.parseLong(req.getParameter("numero"));
+                String agencia = req.getParameter("agencia");
+                String horario = req.getParameter("horario");
+
+                dataSource.insertFlight(new FlightData(number,agencia,horario));
+
                 view = "cadastroVoos.jsp";
 
                 break;
