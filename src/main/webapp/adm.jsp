@@ -21,7 +21,7 @@
     <form action="adm.do?action=login" method="post">
         <div class="row mb-3">
             <label for="inputEmail">Email</label>
-            <input type="email" class="col-sm-2 col-form-label" id="inputEmail" name="email">
+            <input type="text" class="col-sm-2 col-form-label" id="inputEmail" name="email">
         </div>
 
         <div class="row mb-3">
@@ -34,6 +34,7 @@
     </form>
 
     <p><a href="index.jsp">Retornar ao menu</a></p>
+    <p><a href="escolhaadm.jsp">Proxima pagina</a></p>
 
 </body>
 </html>
