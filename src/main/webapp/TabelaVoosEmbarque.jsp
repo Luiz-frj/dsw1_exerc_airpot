@@ -57,3 +57,5 @@
 <a href="index.jsp">Voltar para pagina anterior</a>
 </body>
 </html>
+
+<!--  && lista.stream().filter(v -> v.getState() == request.getAttribute("") -->

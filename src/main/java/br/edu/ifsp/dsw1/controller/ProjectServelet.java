@@ -2,6 +2,7 @@ package br.edu.ifsp.dsw1.controller;
 
 import br.edu.ifsp.dsw1.model.entity.FlightData;
 import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
+import br.edu.ifsp.dsw1.model.flightstates.Arriving;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,8 +12,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+
 @WebServlet("/adm.do")
-public class ProjectServelet extends HttpServlet {
+public class ProjectServelet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
     private final String email = "admin";
@@ -59,17 +61,42 @@ public class ProjectServelet extends HttpServlet {
                 break;
 
             case "cadastro":
-                Long number = Long.parseLong(req.getParameter("numero"));
-                String agencia = req.getParameter("agencia");
-                String horario = req.getParameter("horario");
-
-                dataSource.insertFlight(new FlightData(number, agencia, horario));
 
                 view = "cadastroVoos.jsp";
 
                 break;
 
+            case "novoVoo":
+
+                Long number = Long.parseLong(req.getParameter("numero"));
+                String agencia = req.getParameter("agencia");
+                String horario = req.getParameter("horario");
+
+                FlightData voo = new FlightData(number, agencia, horario);
+                voo.setState(Arriving.getIntance());
+
+                dataSource.insertFlight(voo);
+
+                view = "cadastroVoos.jsp";
+
+                break;
+
+            case "tabela":
+
+                req.setAttribute("voos", dataSource.getAllFligthts());
+
+                view ="voostable.jsp";
+
+                break;
+
             case "update":
+
+                dataSource.updateFlight(Long.parseLong(req.getParameter("numero")));
+
+                System.out.println("O voo de numero" + req.getParameter("numero") + "mudou de estado para");
+
+                req.setAttribute("voos", dataSource.getAllFligthts());
+
                 view ="voostable.jsp";
 
                 break;

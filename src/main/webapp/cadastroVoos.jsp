@@ -17,7 +17,7 @@
 
 </head>
 <body>
-  <form action="adm.do?action=cadastro" method="post">
+  <form action="adm.do?action=novoVoo" method="post">
 
     <div class="row mb-3">
         <label for="inputnumero">Numero</label>
@@ -35,7 +35,6 @@
       </div>
 
       <button type="submit" class="btn btn-primary">Cadastrar</button>
-
   </form>
 
   <a href="escolhaadm.jsp">Voltar pagina</a>

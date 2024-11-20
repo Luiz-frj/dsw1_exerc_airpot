@@ -18,7 +18,7 @@
 <ul>
     <li><a href="adm.do?action=cadastro">Cadastrar Voo</a></li><br>
 
-    <li><a href="adm.do?action=update">Tabela de Voos</a></li><br>
+    <li><a href="adm.do?action=tabela">Tabela de Voos</a></li><br>
 
     <li><a href="adm.do?action=logout">Voltar a pagina inicial</a></li><br>
 </ul>

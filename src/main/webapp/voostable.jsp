@@ -32,7 +32,7 @@
 
         <tbody>
             <%
-                List<FlightData> lista = (List<FlightData>) request.getAttribute("flights");
+                List<FlightData> lista = (List<FlightData>) request.getAttribute("voos");
                 if(lista != null && !lista.isEmpty()){
                     for(FlightData voo : lista){
             %>
@@ -43,8 +43,8 @@
                 <td><%= voo.getTime()%></td>
                 <td><%= voo.getState().getClass().getSimpleName()%></td>
                 <td>
-                    <form action="adm.do?action=sendUpdate" method="post">
-                        <input type="hidden" name="numeroDeVoo" value="<%= voo.getFlightNumber()%>">
+                    <form action="adm.do?action=update" method="post">
+                        <input type="hidden" name="numero" value="<%= voo.getFlightNumber()%>">
                         <button type="submit">Atualizar</button>
                     </form>
                 </td>
