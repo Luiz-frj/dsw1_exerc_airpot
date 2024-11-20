@@ -38,7 +38,7 @@
 
   </form>
 
-  <a href="escolhaadm.jsp.html">Voltar pagina</a>
+  <a href="escolhaadm.jsp">Voltar pagina</a>
 
 </body>
 </html>
