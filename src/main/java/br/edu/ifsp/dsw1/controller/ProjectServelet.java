@@ -29,36 +29,41 @@ public class ProjectServelet extends HttpServlet {
         String action = req.getParameter("action");
         String view = "";
 
-        if ("login".equals(action)){
-            String name = req.getParameter("email");
-            String senha = req.getParameter("password");
-            String msg = "";
-            if(email.equals(name) && password.equals(senha)){
-                HttpSession session = req.getSession();
+        switch (action){
+            case "login":
+                String name = req.getParameter("email");
+                String senha = req.getParameter("password");
+                String msg = "";
+                if(email.equals(name) && password.equals(senha)){
+                    HttpSession session = req.getSession();
 
-                session.setAttribute("Usuario", email);
-                session.setMaxInactiveInterval(5 * 60);
+                    session.setAttribute("Usuario", email);
+                    session.setMaxInactiveInterval(5 * 60);
 
-                view = "escolhaadm.jsp";
-            }else {
-                req.setAttribute(msg, "Erro ao entrar");
-                view = "admErro.jsp";
-            }
-        } else {
-            if("logout".equals(action)){
+                    view = "escolhaadm.jsp";
+                }else {
+                    req.setAttribute(msg, "Erro ao entrar");
+                    view = "admErro.jsp";
+                }
+                break;
+
+            case "logout":
                 HttpSession sessao = req.getSession(false);
                 sessao.invalidate();
 
                 view = "index.jsp";
-            } else {
-                if("cadastro".equals(action)){
-                    view = "cadastroVoos.jsp";
-                } else{
-                    if("update".equals(action)){
-                        view ="voostable.jsp";
-                    }
-                }
-            }
+
+                break;
+
+            case "cadastro":
+                view = "cadastroVoos.jsp";
+
+                break;
+
+            case "update":
+                view ="voostable.jsp";
+
+                break;
         }
 
         var dispacher = req.getRequestDispatcher(view);
