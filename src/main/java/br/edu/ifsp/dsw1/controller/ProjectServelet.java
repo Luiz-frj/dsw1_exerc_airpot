@@ -63,7 +63,7 @@ public class ProjectServelet extends HttpServlet {
                 String agencia = req.getParameter("agencia");
                 String horario = req.getParameter("horario");
 
-                dataSource.insertFlight(new FlightData(number,agencia,horario));
+                dataSource.insertFlight(new FlightData(number, agencia, horario));
 
                 view = "cadastroVoos.jsp";
 
