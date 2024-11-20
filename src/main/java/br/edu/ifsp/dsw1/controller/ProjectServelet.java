@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -24,20 +25,30 @@ public class ProjectServelet extends HttpServlet {
         processRequest(req, resp);
     }
 
-    private String processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String view = "";
 
         if ("login".equals(action)){
+            String name = req.getParameter("email");
+            String senha = req.getParameter("password");
             String msg = "";
-            if(req.getParameter("email").equals(email)  && req.getParameter("password").equals(password)){
+            if(email.equals(name) && password.equals(senha)){
+                HttpSession session = req.getSession();
+
+                session.setAttribute("Usuario", email);
+                session.setMaxInactiveInterval(5 * 60);
+
                 view = "escolhaadm.jsp";
             }else {
                 req.setAttribute(msg, "Erro ao entrar");
-                view = "adm.jsp";
+                view = "admErro.jsp";
             }
         } else {
             if("logout".equals(action)){
+                HttpSession sessao = req.getSession(false);
+                sessao.invalidate();
+
                 view = "index.jsp";
             } else {
                 if("cadastro".equals(action)){
@@ -50,7 +61,9 @@ public class ProjectServelet extends HttpServlet {
             }
         }
 
-        return resp.encodeRedirectURL(view);
+        var dispacher = req.getRequestDispatcher(view);
+        dispacher.forward(req, resp);
+
     }
 
 }
