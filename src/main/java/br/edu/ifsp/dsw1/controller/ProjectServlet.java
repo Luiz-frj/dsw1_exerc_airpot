@@ -3,7 +3,6 @@ package br.edu.ifsp.dsw1.controller;
 import br.edu.ifsp.dsw1.model.Totem.TotemTookOff;
 import br.edu.ifsp.dsw1.model.entity.*;
 import br.edu.ifsp.dsw1.model.flightstates.Arriving;
-import br.edu.ifsp.dsw1.model.observer.FlightDataObserver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/adm.do")
-public class ProjectServelet extends HttpServlet{
+public class ProjectServlet extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
     private final String email = "admin";
@@ -92,6 +91,7 @@ public class ProjectServelet extends HttpServlet{
 
                 dataSource.insertFlight(voo);
 
+                arriving.update(voo);
 
                 view = "cadastroVoos.jsp";
 
