@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: junior
+  Date: 21/11/24
+  Time: 16:59
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +33,9 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="adm.jsp">
             Administração</a></li>
-          <li class="nav-item"><a class="nav-link" href="TabelaVoosEmbarque.jsp"> Sala
+          <li class="nav-item"><a class="nav-link" href="TabelaVoosEmbarque.jsp" action="adm.do?tabelaEmbarque"> Sala
             de Embarque</a></li>
-          <li class="nav-item"><a class="nav-link" href="TabelaVoosDesembarque.jsp"> Sala
+          <li class="nav-item"><a class="nav-link" href="TabelaVoosDesembarque.jsp" action="adm.do?tabelaDesembarque"> Sala
             de Desembarque</a></li>
         </ul>
       </div>
