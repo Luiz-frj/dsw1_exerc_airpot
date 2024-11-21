@@ -3,6 +3,7 @@ package br.edu.ifsp.dsw1.controller;
 import br.edu.ifsp.dsw1.model.entity.FlightData;
 import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
 import br.edu.ifsp.dsw1.model.flightstates.Arriving;
+import br.edu.ifsp.dsw1.model.observer.FlightDataObserver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -77,6 +78,8 @@ public class ProjectServelet extends HttpServlet{
 
                 dataSource.insertFlight(voo);
 
+                //dataSource.register();
+
                 view = "cadastroVoos.jsp";
 
                 break;
@@ -93,9 +96,12 @@ public class ProjectServelet extends HttpServlet{
 
                 dataSource.updateFlight(Long.parseLong(req.getParameter("numero")));
 
-                System.out.println("O voo de numero" + req.getParameter("numero") + "mudou de estado para");
+                System.out.println("O voo de numero" + req.getParameter("numero") + "mudou de estado");
 
                 req.setAttribute("voos", dataSource.getAllFligthts());
+
+                dataSource.notifyObservers();
+
 
                 view ="voostable.jsp";
 
