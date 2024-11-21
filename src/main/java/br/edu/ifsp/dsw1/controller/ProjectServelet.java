@@ -1,7 +1,7 @@
 package br.edu.ifsp.dsw1.controller;
 
-import br.edu.ifsp.dsw1.model.entity.FlightData;
-import br.edu.ifsp.dsw1.model.entity.FlightDataCollection;
+import br.edu.ifsp.dsw1.model.Totem.TotemTookOff;
+import br.edu.ifsp.dsw1.model.entity.*;
 import br.edu.ifsp.dsw1.model.flightstates.Arriving;
 import br.edu.ifsp.dsw1.model.observer.FlightDataObserver;
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-
 @WebServlet("/adm.do")
 public class ProjectServelet extends HttpServlet{
 
@@ -22,6 +21,21 @@ public class ProjectServelet extends HttpServlet{
     private final String password = "admin";
     private static final FlightDataCollection dataSource = new FlightDataCollection();
 
+    private TotemArriving arriving = new TotemArriving();
+    private TotemBoarding boarding = new TotemBoarding();
+    private TotemTakingOff takingOff = new TotemTakingOff();
+    private TotemTookOff tookOff = new TotemTookOff();
+
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        dataSource.register(arriving);
+        dataSource.register(boarding);
+        dataSource.register(takingOff);
+        dataSource.register(tookOff);
+    }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         processRequest(req, resp);
@@ -78,7 +92,6 @@ public class ProjectServelet extends HttpServlet{
 
                 dataSource.insertFlight(voo);
 
-                //dataSource.register();
 
                 view = "cadastroVoos.jsp";
 
@@ -92,6 +105,21 @@ public class ProjectServelet extends HttpServlet{
 
                 break;
 
+            case "tabelaEmbarque":
+                req.setAttribute("voos", dataSource.getAllFligthts());
+
+                view = "TabelaVoosEmbarque.jsp";
+
+                break;
+
+            case "tabelaDesembarque":
+
+                req.setAttribute("voos", dataSource.getAllFligthts());
+
+                view = "TabelaVoosDesembarque.jsp";
+
+                break;
+
             case "update":
 
                 dataSource.updateFlight(Long.parseLong(req.getParameter("numero")));
@@ -101,7 +129,6 @@ public class ProjectServelet extends HttpServlet{
                 req.setAttribute("voos", dataSource.getAllFligthts());
 
                 dataSource.notifyObservers();
-
 
                 view ="voostable.jsp";
 

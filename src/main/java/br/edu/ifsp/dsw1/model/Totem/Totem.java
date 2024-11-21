@@ -15,10 +15,6 @@ public abstract class Totem implements FlightDataObserver {
         flights = new LinkedList<FlightData>();
     }
 
-    public void remove(FlightData flight) {
-        flights.remove(flight);
-    }
-
     public List<FlightData> getAllFlights(){
         return new ArrayList<FlightData>(flights);
     }
