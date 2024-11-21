@@ -34,7 +34,6 @@
     </form>
 
     <p><a href="index.jsp">Retornar ao menu</a></p>
-    <p><a href="escolhaadm.jsp">Proxima pagina</a></p>
 
 </body>
 </html>

@@ -139,7 +139,6 @@ public class ProjectServlet extends HttpServlet {
                 break;
 
             case "update": // Ação para atualizar o estado de um voo.
-
                 dataSource.updateFlight(Long.parseLong(req.getParameter("numero"))); // Atualiza o estado do voo pelo número.
 
                 System.out.println("O voo de número " + req.getParameter("numero") + " mudou de estado"); // Loga a atualização.
