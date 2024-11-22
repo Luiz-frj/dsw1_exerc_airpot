@@ -27,6 +27,7 @@
         <th scope="col">Numero do Voo</th>
         <th scope="col">Agencia</th>
         <th scope="col">Horario</th>
+        <th scope="col">Status </th>
     </tr>
     </thead>
 
@@ -34,10 +35,10 @@
     <%
         List<FlightData> lista = (List<FlightData>) request.getAttribute("voos");
         if(lista != null && !lista.isEmpty()){
-            List<FlightData> voosBoarding = lista.stream()
-                    .filter(v -> v.getState() instanceof Boarding)
-                    .collect(Collectors.toList());
-            for(FlightData voo : voosBoarding){
+//            List<FlightData> voosBoarding = lista.stream()
+//                    .filter(v -> v.getState() instanceof Boarding)
+//                    .collect(Collectors.toList());
+            for(FlightData voo : lista){
     %>
 
     <tr>
@@ -58,7 +59,8 @@
 
 </table>
 
-<a href="index.jsp">Voltar para pagina anterior</a>
+<a href="index.jsp">Voltar para pagina anterior</a><br>
+<a href="adm.do?action=tabelaEmbarque">Atualizar lista</a>
 </body>
 </html>
 

@@ -7,6 +7,9 @@ import br.edu.ifsp.dsw1.model.Totem.TotemTakingOff;
 import br.edu.ifsp.dsw1.model.Totem.TotemTookOff;
 import br.edu.ifsp.dsw1.model.entity.*;
 import br.edu.ifsp.dsw1.model.flightstates.Arriving;
+import br.edu.ifsp.dsw1.model.flightstates.Boarding;
+import br.edu.ifsp.dsw1.model.flightstates.TakingOff;
+import br.edu.ifsp.dsw1.model.flightstates.TookOff;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // Define a URL que ativa essa Servlet.
 @WebServlet("/adm.do")
@@ -108,8 +113,6 @@ public class ProjectServlet extends HttpServlet {
 
                 dataSource.insertFlight(voo); // Insere o voo na base de dados.
 
-                arriving.update(voo); // Atualiza o totem relacionado ao estado "Arriving".
-
                 view = "cadastroVoos.jsp"; // Redireciona para a página de cadastro.
 
                 break;
@@ -124,7 +127,11 @@ public class ProjectServlet extends HttpServlet {
 
             case "tabelaEmbarque": // Ação para exibir voos em estado de embarque.
 
-                req.setAttribute("voos", dataSource.getAllFligthts()); // Adiciona os voos à requisição.
+                List<FlightData> voosBoarding = dataSource.getAllFligthts().stream()
+                        .filter(vooB -> vooB.getState() instanceof Boarding)
+                        .collect(Collectors.toList());
+
+                req.setAttribute("voos", voosBoarding); // Adiciona os voos à requisição.
 
                 view = "TabelaVoosEmbarque.jsp"; // Redireciona para a tabela específica.
 
@@ -132,20 +139,50 @@ public class ProjectServlet extends HttpServlet {
 
             case "tabelaDesembarque": // Ação para exibir voos em estado de desembarque.
 
-                req.setAttribute("voos", dataSource.getAllFligthts()); // Adiciona os voos à requisição.
+                List<FlightData> voosArriving = dataSource.getAllFligthts().stream()
+                        .filter(vooA -> vooA.getState() instanceof Arriving)
+                        .collect(Collectors.toList());
+
+                req.setAttribute("voos", voosArriving); // Adiciona os voos à requisição.
 
                 view = "TabelaVoosDesembarque.jsp"; // Redireciona para a tabela específica.
 
                 break;
 
             case "update": // Ação para atualizar o estado de um voo.
-                dataSource.updateFlight(Long.parseLong(req.getParameter("numero"))); // Atualiza o estado do voo pelo número.
+                //Localiza o Numero do voo que se deve alterar o valor
+                Long numero = Long.parseLong(req.getParameter("numero"));
+
+                // Atualiza o estado do voo pelo número.
+                dataSource.getAllFligthts().forEach(Voo ->{
+                    if(Voo.getFlightNumber().equals(numero)){ // Verifica se o número coincide.
+                        switch (Voo.getState().getClass().getSimpleName()){
+                            case "Arriving":
+                                dataSource.updateFlight(numero);// Atualiza o estado para "Boarding".
+                                dataSource.notifyObservers();// Notifica os observadores das alterações.
+                                break;
+
+                            case "Boarding":
+                                dataSource.updateFlight(numero);// Atualiza o estado para "TakingOff".
+                                dataSource.notifyObservers();// Notifica os observadores das alterações.
+                                break;
+
+                            case "TakingOff":
+                                dataSource.updateFlight(numero);// Atualiza o estado para "TookOff".
+                                dataSource.notifyObservers();// Notifica os observadores das alterações.
+                                break;
+
+                            case "TookOff":
+                                dataSource.updateFlight(numero);//Remove o voo da lista
+                                dataSource.notifyObservers();// Notifica os observadores das alterações.
+                                break;
+                        }
+                    }
+                });
 
                 System.out.println("O voo de número " + req.getParameter("numero") + " mudou de estado"); // Loga a atualização.
 
                 req.setAttribute("voos", dataSource.getAllFligthts()); // Adiciona os voos atualizados à requisição.
-
-                dataSource.notifyObservers(); // Notifica os observadores das alterações.
 
                 view = "voostable.jsp"; // Redireciona para a tabela de voos.
 

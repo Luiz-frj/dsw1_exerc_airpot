@@ -14,6 +14,6 @@
   <title>DSW1</title>
 </head>
 <body>
-<jsp:include page="/includes/base.jsp"></jsp:include>
+<jsp:include page="/includes/base.html"></jsp:include>
 </body>
 </html>

@@ -27,6 +27,7 @@
         <th scope="col">Numero do Voo</th>
         <th scope="col">Agencia</th>
         <th scope="col">Horario</th>
+        <th scope="col">Status </th>
     </tr>
     </thead>
 
@@ -34,10 +35,10 @@
     <%
         List<FlightData> lista = (List<FlightData>) request.getAttribute("voos");
         if(lista != null && !lista.isEmpty()){
-            List<FlightData> voosArriving = lista.stream()
-                    .filter(v -> v.getState() instanceof Arriving)
-                    .collect(Collectors.toList());
-            for(FlightData voo : voosArriving){
+//            List<FlightData> voosArriving = lista.stream()
+//                    .filter(v -> v.getState() instanceof Arriving)
+//                    .collect(Collectors.toList());
+            for(FlightData voo : lista){
     %>
 
     <tr>
@@ -58,8 +59,8 @@
 
 </table>
 
-<a href="index.jsp">Voltar para pagina anterior</a>
+<a href="index.jsp">Voltar para pagina anterior</a><br>
+<a href="adm.do?action=tabelaDesembarque">Atualizar lista</a>
 </body>
 </html>
 
-<!--  && lista.stream().filter(v -> v.getState() == request.getAttribute("") -->
